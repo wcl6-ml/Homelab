@@ -6,3 +6,5 @@ resources:
   - cloudflare.yaml
   - test-secret.yaml
   - test-secret2.yaml
+  - cloudflare-secret.yaml
+  - linkding-admin.yaml
