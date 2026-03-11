@@ -31,3 +31,10 @@ spec:
   values:
     grafana:
       adminPassword: will
+      ingress:
+        enabled: true
+        ingressClassName: traefik # tells k8s which controller to hanlde this
+        host:
+          - grs.weichunglai.com
+        tls: []
+
