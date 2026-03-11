@@ -36,5 +36,8 @@ spec:
         ingressClassName: traefik # tells k8s which controller to hanlde this
         hosts:
           - grs.weichunglai.com
-        tls: []
+        tls: 
+          - secretName: grafana-tls-secret
+            hosts:
+            - grs.weichunglai.com
 
