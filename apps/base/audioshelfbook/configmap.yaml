@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: abs-config 
-data:
-  # property-like keys; each key maps to a simple value
-  PORT: "3005"
