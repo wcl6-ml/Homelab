@@ -25,3 +25,7 @@ spec:
               configMapKeyRef:
                 name: abs-config           # The ConfigMap this value comes from.
                 key: PORT # The key to fetch.
+      volumes:
+        - name: audiobookshelf-data
+          persistentVolumeClaim:
+            claimName: audiobookshelf-data-pvc
