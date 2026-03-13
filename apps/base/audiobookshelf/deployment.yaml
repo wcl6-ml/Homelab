@@ -14,6 +14,11 @@ spec:
         app: audiobookshelf
 
     spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
+
       containers:
         - name: audiobookshelf
           image: ghcr.io/advplyr/audiobookshelf:2.17.2
@@ -21,6 +26,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: audiobookshelf-configmap
+            - secretRef:
+                name: audiobooks-admin
 
           ports:
             - containerPort: 3005
@@ -31,6 +38,8 @@ spec:
               name: audiobookshelf-config
             - mountPath: /metadata
               name: audiobookshelf-metadata
+            - mountPath: /audiobooks
+              name: audiobookshelf-audiobooks
 
       restartPolicy: Always
 
@@ -41,3 +50,6 @@ spec:
         - name: audiobookshelf-metadata
           persistentVolumeClaim:
             claimName: audiobookshelf-metadata
+        - name: audiobookshelf-audiobooks
+          persistentVolumeClaim:
+            claimName: audiobookshelf-audiobooks
