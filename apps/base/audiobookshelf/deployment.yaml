@@ -25,6 +25,10 @@ spec:
               configMapKeyRef:
                 name: abs-config           # The ConfigMap this value comes from.
                 key: PORT # The key to fetch.
+        volumeMounts:
+           - mountPath: /etc/audiobookshelf/data
+             name: audiobookshelf-data
+  
       volumes:
         - name: audiobookshelf-data
           persistentVolumeClaim:
