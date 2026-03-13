@@ -1,55 +1,53 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: audiobookshelf
   name: audiobookshelf
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: audiobookshelf
+
   template:
     metadata:
       labels:
         app: audiobookshelf
+
     spec:
       securityContext:
-        fsGroup: 1000 # node group ID
-        runAsUser: 1000  # node user ID
-        runAsGroup: 1000 # node group ID
-			initContainers:
-			- name: fix-permissions
-				image: busybox
-				# Use -p to create the directory if it's missing, then chown it
-				command: ["sh", "-c", "mkdir -p /config /metadata && chown -R 1000:1000 /config /metadata"]
-				volumeMounts:
-				- name: config-storage
-					mountPath: /config
-				- name: metadata-storage
-					mountPath: /metadata
-				securityContext:
-					runAsUser: 0  # Only the initContainer runs as root to 'prep' the dirt
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
+
       containers:
-      - image: ghcr.io/advplyr/audiobookshelf:latest
-        name: audiobookshelf
-        env:
-          # Define the environment variable
-          - name: PORT # Notice that the case is different here
-                                       # from the key name in the ConfigMap.
-            valueFrom:
-              configMapKeyRef:
-                name: abs-config           # The ConfigMap this value comes from.
-                key: PORT # The key to fetch.
-        volumeMounts:
-           - mountPath: /config
-             name: audiobookshelf-data
-           - mountPath: /metadata
-             name: metadata-storage
+        - name: audiobookshelf
+          image: ghcr.io/advplyr/audiobookshelf:2.17.2
+
+          envFrom:
+            - configMapRef:
+                name: audiobookshelf-configmap
+
+          ports:
+            - containerPort: 3005
+              protocol: TCP
+
+          volumeMounts:
+            - mountPath: /config
+              name: audiobookshelf-config
+            - mountPath: /metadata
+              name: audiobookshelf-metadata
+            - mountPath: /audiobooks
+              name: audiobookshelf-audiobooks
+
+      restartPolicy: Always
+
       volumes:
-        - name: audiobookshelf-data
+        - name: audiobookshelf-config
           persistentVolumeClaim:
-            claimName: audiobookshelf-data-pvc
-				- name: metadata-storage
+            claimName: audiobookshelf-config
+        - name: audiobookshelf-metadata
           persistentVolumeClaim:
-					  claimName: audiobookshelf-metadata-pvc
+            claimName: audiobookshelf-metadata
+        - name: audiobookshelf-audiobooks
+          persistentVolumeClaim:
+            claimName: audiobookshelf-audiobooks
