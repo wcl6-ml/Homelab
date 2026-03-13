@@ -53,4 +53,3 @@ spec:
 				- name: metadata-storage
           persistentVolumeClaim:
 					  claimName: audiobookshelf-metadata-pvc
-
