@@ -25,8 +25,6 @@ spec:
         volumeMounts:
           - name: audiobookshelf-data
             mountPath: /config
-          - name: audiobookshelf-metadata
-            mountPath: /metadata
         securityContext:
           runAsUser: 0  # This specific container runs as root to fix things
 
@@ -44,8 +42,6 @@ spec:
         volumeMounts:
            - mountPath: /config
              name: audiobookshelf-data
-           - mountPath: /metadata
-             name: audiobookshelf-metadata
       volumes:
         - name: audiobookshelf-data
           persistentVolumeClaim:
