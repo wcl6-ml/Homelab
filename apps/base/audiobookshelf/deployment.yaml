@@ -18,17 +18,18 @@ spec:
         fsGroup: 1000 # node group ID
         runAsUser: 1000  # node user ID
         runAsGroup: 1000 # node group ID
-      initContainers:
-      - name: fix-permissions
-        image: busybox
-        command: ["mkdir", "/metadata"]
-        command: ["sh", "-c", "chown -R 1000:1000 /config /metadata"]
-        volumeMounts:
-          - name: audiobookshelf-data
-            mountPath: /config
-        securityContext:
-          runAsUser: 0  # This specific container runs as root to fix things
-
+			initContainers:
+			- name: fix-permissions
+				image: busybox
+				# Use -p to create the directory if it's missing, then chown it
+				command: ["sh", "-c", "mkdir -p /config /metadata && chown -R 1000:1000 /config /metadata"]
+				volumeMounts:
+				- name: config-storage
+					mountPath: /config
+				- name: metadata-storage
+					mountPath: /metadata
+				securityContext:
+					runAsUser: 0  # Only the initContainer runs as root to 'prep' the dirt
       containers:
       - image: ghcr.io/advplyr/audiobookshelf:latest
         name: audiobookshelf
@@ -43,7 +44,13 @@ spec:
         volumeMounts:
            - mountPath: /config
              name: audiobookshelf-data
+           - mountPath: /metadata
+             name: metadata-storage
       volumes:
         - name: audiobookshelf-data
           persistentVolumeClaim:
             claimName: audiobookshelf-data-pvc
+				- name: metadata-storage
+          persistentVolumeClaim:
+					  claimName: audiobookshelf-metadata-pvc
+
