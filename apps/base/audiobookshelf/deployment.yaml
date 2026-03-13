@@ -14,11 +14,6 @@ spec:
         app: audiobookshelf
 
     spec:
-      securityContext:
-        fsGroup: 1000
-        runAsUser: 1000
-        runAsGroup: 1000
-
       containers:
         - name: audiobookshelf
           image: ghcr.io/advplyr/audiobookshelf:2.17.2
@@ -36,7 +31,8 @@ spec:
               name: audiobookshelf-config
             - mountPath: /metadata
               name: audiobookshelf-metadata
-     restartPolicy: Always
+
+      restartPolicy: Always
 
       volumes:
         - name: audiobookshelf-config
