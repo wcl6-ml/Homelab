@@ -21,7 +21,8 @@ spec:
       initContainers:
       - name: fix-permissions
         image: busybox
-        command: ["sh", "-c", "chown -R 1000:1000 /config"]
+        command: ["mkdir", "/metadata"]
+        command: ["sh", "-c", "chown -R 1000:1000 /config /metadata"]
         volumeMounts:
           - name: audiobookshelf-data
             mountPath: /config
