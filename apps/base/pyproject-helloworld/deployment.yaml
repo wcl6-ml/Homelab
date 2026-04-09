@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pyproject-helloworld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pyproject-helloworld
+
+  template:
+    metadata:
+      labels:
+        app: pyproject-helloworld
+
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
+
+      containers:
+        - name: pyproject-helloworld
+          image: ghcr.io/advplyr/pyproject-helloworld:2.17.2
+
+          envFrom:
+            - configMapRef:
+                name: pyproject-helloworld-configmap
+#            - secretRef:
+#                name: audiobooks-admin
+
+          ports:
+            - containerPort: 3080
+              protocol: TCP
+
+#          volumeMounts:
+#            - mountPath: /config
+#              name: pyproject-helloworld-config
+#            - mountPath: /metadata
+#              name: pyproject-helloworld-metadata
+#            - mountPath: /audiobooks
+#              name: pyproject-helloworld-audiobooks
+
+      restartPolicy: Always
+
+#      volumes:
+#        - name: pyproject-helloworld-config
+#          persistentVolumeClaim:
+#            claimName: pyproject-helloworld-config
+#        - name: pyproject-helloworld-metadata
+#          persistentVolumeClaim:
+#            claimName: pyproject-helloworld-metadata
+#        - name: pyproject-helloworld-audiobooks
+#          persistentVolumeClaim:
+#            claimName: pyproject-helloworld-audiobooks
