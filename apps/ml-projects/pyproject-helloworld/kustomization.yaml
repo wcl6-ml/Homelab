@@ -5,4 +5,7 @@ resources:
   - ../../base/pyproject-helloworld/
 #  - cloudflare.yaml
 #  - cloudflare-secret.yaml
-#  - audiobooks-admin.yaml
+#  - audiobooks-admin.yml
+  - imagerepository.yaml
+  - imagepolicy.yaml
+  - imageupdateautomation.yaml 

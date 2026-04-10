@@ -21,7 +21,7 @@ spec:
 
       containers:
         - name: pyproject-helloworld
-          image: whlb/pyproject-gitops-demo:sha-87de9b44e7613a203df53b8b5e87751c1be94ceb  
+          image: whlb/pyproject-gitops-demo:latest
 
           envFrom:
             - configMapRef:

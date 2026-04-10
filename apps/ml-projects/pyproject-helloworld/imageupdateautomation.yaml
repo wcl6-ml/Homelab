@@ -1,0 +1,24 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: pyproject-gitops-demo
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system       # the GitRepository Flux created during bootstrap
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        name: flux-bot
+        email: flux@example.com
+      messageTemplate: "chore: update pyproject-gitops-demo image to {{range .Updated.Images}}{{.}}{{end}}"
+    push:
+      branch: main
+  update:
+    path: ./apps            # scan this folder for the marker comment
+    strategy: Setters
