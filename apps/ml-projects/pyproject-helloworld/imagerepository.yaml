@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
-  name: hello-api
+  name: pyproject-gitops-demo
   namespace: flux-system
 spec:
   image: whlb/pyproject-gitops-demo
