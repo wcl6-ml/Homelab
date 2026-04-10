@@ -8,6 +8,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system       # the GitRepository Flux created during bootstrap
+    namespace: flux-system 
   git:
     checkout:
       ref:

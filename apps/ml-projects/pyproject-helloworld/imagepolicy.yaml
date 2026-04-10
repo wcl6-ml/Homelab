@@ -7,7 +7,8 @@ spec:
   imageRepositoryRef:
     name: pyproject-gitops-demo
   filterTags:
-    pattern: '^sha-[a-f0-9]+'    # only match tags like sha-abc123
+#    pattern: '^sha-[a-f0-9]+'    # only match tags like sha-abc123
+    pattern: '.*' 
     extract: '$0'
   policy:
     alphabetical:
