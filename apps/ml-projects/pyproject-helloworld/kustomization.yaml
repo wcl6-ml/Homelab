@@ -6,6 +6,6 @@ resources:
 #  - cloudflare.yaml
 #  - cloudflare-secret.yaml
 #  - audiobooks-admin.yml
-  - imagerepository.yaml
-  - imagepolicy.yaml
-  - imageupdateautomation.yaml 
+#  - imagerepository.yaml
+#  - imagepolicy.yaml
+#  - imageupdateautomation.yaml 
