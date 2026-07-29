@@ -1,4 +1,5 @@
 .envrc
-kubeconfig-arch
+kubeconfig*
+project.md
 
 
