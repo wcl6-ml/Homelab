@@ -1,0 +1,23 @@
+{
+  "name": "dev-env",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "vscode",
+  "onCreateCommand": {
+    "Enable-setup-script": "chmod +x scripts/setup && scripts/setup",
+    "Ownership-of-zsh": "sudo chsh -s /usr/bin/zsh $USER"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.profiles.linux": {
+      "zsh":{
+        "path": "/usr/bin/zsh"
+      }
+    }
+  }
+}
+
