@@ -16,3 +16,11 @@ spec:
         target:
           type: Utilization
           averageUtilization: 50 # Scale up when CPU exceeds 50% of 100m (50m)
+# --- ADD THIS BEHAVIOR SECTION FOR FAST SCALE-DOWN ---
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 30 # Reduce wait time from 5 min to 30 seconds
+      policies:
+      - type: Percent
+        value: 100 # Allow killing all unnecessary pods at once
+        periodSeconds: 15          
