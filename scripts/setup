@@ -1,1 +1,3 @@
 echo "Hello World"
+/usr/local/bin/mise trust --yes /workspaces/$DEVPOD_WORKSPACE_ID/mise.toml && /usr/local/bin/mise install --yes
+
