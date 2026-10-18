@@ -9,7 +9,7 @@
     "Ownership-of-zsh": "sudo chsh -s /usr/bin/zsh $USER"
   },
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:4": {}
   },
   "settings": {
     "terminal.integrated.defaultProfile.linux": "zsh",
