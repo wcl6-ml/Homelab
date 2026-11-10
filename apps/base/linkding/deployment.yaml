@@ -21,7 +21,7 @@ spec:
           resources:
             requests:
               cpu: "100m"
-          image: sissbruecker/linkding:1.45.0
+          image: sissbruecker/linkding:1.47.0
           envFrom:
             - secretRef:
                 name: linkding-admin
